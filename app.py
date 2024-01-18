@@ -99,12 +99,15 @@ app.layout = dbc.Container(
 )
 
 @app.callback(
-    [Output('navbar-container', 'children'), Output('current-language-store', 'data', allow_duplicate=True)],
-    [Input('btn-lang-es', 'n_clicks'), Input('btn-lang-en', 'n_clicks'), Input('btn-lang-pt', 'n_clicks')],
+    [Output('navbar-container', 'children'), 
+     Output('current-language-store', 'data', allow_duplicate=True),
+     Output('loading-spinner', 'className')],  
+    [Input('btn-lang-es', 'n_clicks'), 
+     Input('btn-lang-en', 'n_clicks'), 
+     Input('btn-lang-pt', 'n_clicks')],
     [State('current-language-store', 'data')],
     prevent_initial_call=True,
 )
-
 def update_navbar(btn_lang_es, btn_lang_en, btn_lang_pt, language_data):
     if not dash.callback_context.triggered:
         language = 'es'  # Idioma predeterminado
@@ -114,9 +117,9 @@ def update_navbar(btn_lang_es, btn_lang_en, btn_lang_pt, language_data):
         language_data = {'language': language}
 
     updated_navbar = create_navbar(language)
-    return updated_navbar, language_data
-       
-
+    spinner_class = 'loading-callback-spinner ' + language 
+    return updated_navbar, language_data, spinner_class
+ 
 
 if __name__ == "__main__":
     try:
