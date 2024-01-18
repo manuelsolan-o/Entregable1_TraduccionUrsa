@@ -1628,7 +1628,7 @@ calibration_summary = html.Div(
                             html.Span(
                                 id={"type": "result-calibration", "field": "start-year"}
                             ),
-                            html.Span(html.B(" a ")),
+                            html.Span(html.B(" - ")),
                             html.Span(
                                 id={"type": "result-calibration", "field": "stop-year"}
                             ),
