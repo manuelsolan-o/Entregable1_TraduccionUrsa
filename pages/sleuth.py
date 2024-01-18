@@ -484,6 +484,48 @@ translations = {
         "es": "Ejecutar predicción",
         "en": "Run Prediction",
         "pt": "Executar Previsão"
+    },
+    
+    "Pendiente-faltante": {
+        "es": "Pendiente: ",
+        "en": "Slope: ",
+        "pt": "Declive: "
+    },
+    "Caminos-faltante": {
+        "es": "Caminos: ",
+        "en": "Paths: ",
+        "pt": "Caminhos: "
+    },
+    "Exclusion-faltante": {
+        "es": "Exclusión: ",
+        "en": "Exclusion: ",
+        "pt": "Exclusão: "
+    },
+    "Urbano-faltante": {
+        "es": "Urbano: ",
+        "en": "Urban: ",
+        "pt": "Urbano: "
+    },
+    
+    "Pendiente-faltante2": {
+        "es": "Pendiente: ",
+        "en": "Slope: ",
+        "pt": "Declive: "
+    },
+    "Caminos-faltante2": {
+        "es": "Caminos: ",
+        "en": "Paths: ",
+        "pt": "Caminhos: "
+    },
+    "Exclusion-faltante2": {
+        "es": "Exclusión: ",
+        "en": "Exclusion: ",
+        "pt": "Exclusão: "
+    },
+    "Urbano-faltante2": {
+        "es": "Urbano: ",
+        "en": "Urban: ",
+        "pt": "Urbano: "
     }
     
 }
@@ -1705,20 +1747,41 @@ calibration_summary = html.Div(
             html.Ul(span_list),
         ),
         html.H4(html.Span(id="simulacion-text10"), className="mt-2"),
-        html.Div(
-            html.Ul(
-                [
-                    html.Li(
-                        [
-                            html.Span(html.B(f"{RASTER_FIELD_MAP[field]}: ")),
-                            html.Span(
-                                id={"type": "result-custom-raster", "field": field}
-                            ),
-                        ]
-                    )
-                    for field in RASTER_FIELDS
-                ]
-            )
+        html.Ul(
+    [
+        html.Li(
+            [
+                html.Span(html.B(id = "Pendiente-faltante")),
+                html.Span(
+                    id={"type": "result-custom-raster", "field": "slope"}
+                ),
+            ]
+        ),
+        html.Li(
+            [
+                html.Span(html.B(id = "Caminos-faltante")),
+                html.Span(
+                    id={"type": "result-custom-raster", "field": "roads"}
+                ),
+            ]
+        ),
+        html.Li(
+            [
+                html.Span(html.B(id = "Exclusion-faltante")),
+                html.Span(
+                    id={"type": "result-custom-raster", "field": "excluded"}
+                ),
+            ]
+        ),
+        html.Li(
+            [
+                html.Span(html.B(id = "Urbano-faltante")),
+                html.Span(
+                    id={"type": "result-custom-raster", "field": "urban"}
+                ),
+            ]
+        )
+    ]
         ),
     ],
 )
@@ -1997,21 +2060,41 @@ subtab_2_3 = dbc.Card(
                 [
                     html.H4(html.Span(id = "prediccion-text26")),
                     html.Ul(
-                        [
-                            html.Li(
-                                [
-                                    html.Span(html.B(f"{RASTER_FIELD_MAP[field]}: ")),
-                                    html.Span(
-                                        id={
-                                            "type": "result-prediction-custom-raster",
-                                            "field": field,
-                                        }
-                                    ),
-                                ]
-                            )
-                            for field in RASTER_FIELDS
-                        ]
-                    ),
+    [
+        html.Li(
+            [
+                html.Span(html.B(id = "Pendiente-faltante2")),
+                html.Span(
+                    id={"type": "result-custom-raster", "field": "slope"}
+                ),
+            ]
+        ),
+        html.Li(
+            [
+                html.Span(html.B(id = "Caminos-faltante2")),
+                html.Span(
+                    id={"type": "result-custom-raster", "field": "roads"}
+                ),
+            ]
+        ),
+        html.Li(
+            [
+                html.Span(html.B(id = "Exclusion-faltante2")),
+                html.Span(
+                    id={"type": "result-custom-raster", "field": "excluded"}
+                ),
+            ]
+        ),
+        html.Li(
+            [
+                html.Span(html.B(id = "Urbano-faltante2")),
+                html.Span(
+                    id={"type": "result-custom-raster", "field": "urban"}
+                ),
+            ]
+        )
+    ]
+        ),
                 ]
             ),
             html.Div(
