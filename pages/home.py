@@ -23,7 +23,7 @@ with open("./data/output/cities/cities_by_country.json", "r", encoding="utf8") a
     cities_by_country = json.load(f)
 
 # Traducciones
-with open('./data/output/translations_home.json', 'r', encoding='utf-8') as file:
+with open('./data/translations/home/translations_home.json', 'r', encoding='utf-8') as file:
     translations = json.load(file)
     
 DROPDOWN_STYLE = {
