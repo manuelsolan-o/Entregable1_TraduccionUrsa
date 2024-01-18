@@ -73,7 +73,7 @@ layout = html.Div(
             color="danger",
             dismissable=True,
         ),
-        language_buttons,
+        #language_buttons,
         html.H1(id="text1"),
         html.Div(
             [

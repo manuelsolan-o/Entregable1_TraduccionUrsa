@@ -2108,10 +2108,12 @@ layout = html.Div(
     ]
 )
 
+"""
 layout = html.Div(
     [language_buttons, layout],
     style={"position": "relative"}
 )
+"""
 
 @callback(
     [Output(key, 'children') for key in translations.keys()],
