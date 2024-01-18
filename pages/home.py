@@ -184,20 +184,12 @@ layout = html.Div(
 
 @callback(
     [Output(key, 'children') for key in translations.keys()],
-    [Input('btn-lang-es', 'n_clicks'),
-     Input('btn-lang-en', 'n_clicks'),
-     Input('btn-lang-pt', 'n_clicks')]
+    [Input('current-language-store', 'data')]
 )
-def update_translated_content(btn_lang_es, btn_lang_en, btn_lang_pt):
-    ctx = dash.callback_context
-
-    if not ctx.triggered:
-        language = 'es'  # Idioma predeterminado
-    else:
-        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-        language = 'es' if button_id == 'btn-lang-es' else 'en' if button_id == 'btn-lang-en' else 'pt'
-
-    return [translations[key][language] for key in translations.keys()]
+def update_translated_content(language_data):
+    language = language_data['language'] if language_data else 'es'
+    updated_content = [translations[key][language] for key in translations.keys()]
+    return updated_content
 
 @callback(
     Output("dropdown-city", "options"),

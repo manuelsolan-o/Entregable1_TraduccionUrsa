@@ -1074,41 +1074,33 @@ layout = html.Div(
 """
 @callback(
     [Output(key, 'children') for key in translations.keys()],
-    [Input('btn-lang-es', 'n_clicks'),
-     Input('btn-lang-en', 'n_clicks'),
-     Input('btn-lang-pt', 'n_clicks')]
+    [Input('current-language-store', 'data')]
 )
-def update_translated_content(btn_lang_es, btn_lang_en, btn_lang_pt):
-    ctx = dash.callback_context
-
-    if not ctx.triggered:
-        language = 'es'  # Predeterminado
-    else:
-        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-        language = 'es' if button_id == 'btn-lang-es' else 'en' if button_id == 'btn-lang-en' else 'pt'
-
-    return [translations[key][language] for key in translations.keys()]
+def update_translated_content(language_data):
+    language = language_data['language'] if language_data else 'es'
+    updated_content = [translations[key][language] for key in translations.keys()]
+    return updated_content
 
 # ---
 
 @callback(
-    [Output(key, 'label') for key in tab_translations.keys()], 
+    [Output(key, 'label') for key in tab_translations.keys()],
     [Input('btn-lang-es', 'n_clicks'),
      Input('btn-lang-en', 'n_clicks'),
-     Input('btn-lang-pt', 'n_clicks')]
+     Input('btn-lang-pt', 'n_clicks')],
+    [State('current-language-store', 'data')],
 )
-def update_tab_labels(btn_lang_es, btn_lang_en, btn_lang_pt):
+def update_tab_labels(btn_lang_es, btn_lang_en, btn_lang_pt, language_data):
     ctx = dash.callback_context
 
     if not ctx.triggered:
-        language = 'es'  # Idioma predeterminado
+        language = language_data['language'] if language_data else 'es'
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
         language = 'es' if button_id == 'btn-lang-es' else 'en' if button_id == 'btn-lang-en' else 'pt'
 
     tab_labels = [tab_translations[key][language] for key in tab_translations.keys()]
-
-    return tab_labels  
+    return tab_labels
 
 # ---
 
@@ -1277,14 +1269,15 @@ def download_rasters(n_intervals, task_name):
     Input('btn-lang-es', 'n_clicks'),
     Input('btn-lang-en', 'n_clicks'),
     Input('btn-lang-pt', 'n_clicks'),
+    [State('current-language-store', 'data')],
 )
-def generate_maps(id_hash, bbox_latlon, fua_latlon, uc_latlon, btn_lang_es, btn_lang_en, btn_lang_pt):
+def generate_maps(id_hash, bbox_latlon, fua_latlon, uc_latlon, btn_lang_es, btn_lang_en, btn_lang_pt, language_data):
     if id_hash is None:
         return [dash.no_update] * 5
     
     ctx = dash.callback_context
     if not ctx.triggered:
-        language = 'es'  # Idioma predeterminado
+        language = language_data['language'] if language_data else 'es'
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
         language = 'es' if button_id == 'btn-lang-es' else 'en' if button_id == 'btn-lang-en' else 'pt'
